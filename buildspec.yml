@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - echo starting build
+      - ls -al /
+      - cd /$CODEBUILD_SRC_DIR && mkdir -p test && touch test/test.txt && echo "HELLO" > test.txt && cat test.txt
+      - env
+      - echo $USER
+  build:
+    commands:
+      - echo Build started on `date`  
+      - docker pull httpd:latest      
+  post_build:
+    commands:
+      - docker run -d --user 0 --name my-image -v /$CODEBUILD_SRC_DIR/test:/usr/local/apache2/testing httpd:latest
+      - docker exec $(docker ps -aq --filter="name=my-image") mkdir -p /usr/local/apache2/testing/mytest
+      - docker exec $(docker ps -aq --filter="name=my-image") touch /usr/local/apache2/testing/mytest/mytest.txt
+      - docker exec $(docker ps -aq --filter="name=my-image") ls -al /usr/local/apache2/testing/mytest/
+      - docker exec $(docker ps -aq --filter="name=my-image") echo hello > /usr/local/apache2/testing/mytest/mytest.txt
