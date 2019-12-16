@@ -20,4 +20,3 @@ phases:
       - docker exec $(docker ps -aq --filter="name=my-image") mkdir -p /usr/local/apache2/testing/mytest
       - docker exec $(docker ps -aq --filter="name=my-image") touch /usr/local/apache2/testing/mytest/mytest.txt
       - docker exec $(docker ps -aq --filter="name=my-image") ls -al /usr/local/apache2/testing/mytest/
-      - docker exec $(docker ps -aq --filter="name=my-image") echo hello > /usr/local/apache2/testing/mytest/mytest.txt
