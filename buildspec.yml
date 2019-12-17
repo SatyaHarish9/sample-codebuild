@@ -19,4 +19,4 @@ phases:
       - docker run -d --user 0 --name my-image -v /$CODEBUILD_SRC_DIR/test:/usr/local/apache2/testing httpd:latest
       - docker exec $(docker ps -aq --filter="name=my-image") mkdir -p /usr/local/apache2/testing/mytest
       - docker exec $(docker ps -aq --filter="name=my-image") touch /usr/local/apache2/testing/mytest/mytest.txt
-      - docker exec $(docker ps -aq --filter="name=my-image") ls -al /usr/local/apache2/testing/mytest/
+      - docker exe $(docker ps -aq --filter="name=my-image") ls -al /usr/local/apache2/testing/mytest/
