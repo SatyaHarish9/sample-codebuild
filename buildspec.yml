@@ -10,6 +10,7 @@ phases:
       - cd /$CODEBUILD_SRC_DIR && mkdir -p test && touch test/test.txt && echo "HELLO" > test.txt && cat test.txt
       - env
       - echo $USER
+      - echo running build
   build:
     commands:
       - echo Build started on `date`  
